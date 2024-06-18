@@ -1,0 +1,55 @@
+﻿@model ShopList.Data.DbModels.Product
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Create a new product</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Create" class="shadow p-4 rounded bg-light">
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <input asp-for="Description" class="form-control" placeholder="Enter product description" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="IsDeleted" class="form-label"></label>
+                <select asp-for="IsDeleted" class="form-control">
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                </select>
+                <span asp-validation-for="IsDeleted" class="text-danger"></span>
+            </div>
+            <div class="form-group d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    .shadow {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-label {
+        font-weight: bold;
+    }
+    .form-control {
+        padding: 10px;
+    }
+    .btn {
+        padding: 10px 20px;
+    }
+</style>
+
