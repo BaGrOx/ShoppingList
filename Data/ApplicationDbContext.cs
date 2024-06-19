@@ -13,12 +13,14 @@ namespace ShopList.Data
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<ShoppingList> ShoppingLists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new ProductConfiguration());
+            builder.ApplyConfiguration(new ShoopingListConfiguration());
         }
     }
 }

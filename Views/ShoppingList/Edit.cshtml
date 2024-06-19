@@ -1,0 +1,59 @@
+﻿@model ShopList.Models.ShoppingListViewModel
+
+@{
+    ViewData["Title"] = "Edytuj listę zakupów";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Edytuj listę zakupów</h4>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post" class="shadow p-4 rounded bg-light">
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="form-label">Nazwa</label>
+                <input asp-for="Name" class="form-control" placeholder="Wprowadź nazwę listy zakupów" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="PlannedPurchaseDate" class="form-label">Planowana Data Zakupu</label>
+                <input asp-for="PlannedPurchaseDate" class="form-control" type="date" />
+                <span asp-validation-for="PlannedPurchaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<style>
+    .shadow {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
+    }
+</style>

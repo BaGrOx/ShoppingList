@@ -1,35 +1,30 @@
 ﻿@model ShopList.Models.ProductViewModel
 
 @{
-    ViewData["Title"] = "Create Product";
+    ViewData["Title"] = "Edytuj produkt";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<h4>Create a new product</h4>
+<h4>Edytuj produkt</h4>
 <hr />
 <div class="row justify-content-center">
     <div class="col-md-6">
-        <form asp-action="Create" class="shadow p-4 rounded bg-light">
+        <form asp-action="Edit" method="post" class="shadow p-4 rounded bg-light">
+            <input type="hidden" asp-for="Id" />
             <div class="form-group mb-3">
                 <label asp-for="Description" class="form-label">Opis</label>
-                <input asp-for="Description" class="form-control" placeholder="Nazwa/opis" />
+                <input asp-for="Description" class="form-control" placeholder="Wprowadź opis produktu" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
-                <label asp-for="SelectedShoppingListId" class="form-label">Lista</label>
-                <select asp-for="SelectedShoppingListId" class="form-control">
-                    <option value="">Wybierz liste</option>
-                    @foreach (var list in Model.ShoppingLists)
-                    {
-                        <option value="@list.Id">@list.Name</option>
-                    }
-                </select>
+                <label asp-for="SelectedShoppingListId" class="form-label">Lista zakupów</label>
+                @Html.DropDownListFor(m => m.SelectedShoppingListId, new SelectList(Model.ShoppingLists, "Id", "Name"), "-- Wybierz listę zakupów --", new { @class = "form-control" })
                 <span asp-validation-for="SelectedShoppingListId" class="text-danger"></span>
             </div>
             <div class="form-group d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Dodaj</button>
-                <a asp-action="Index" class="btn btn-secondary">Wróć</a>
+                <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
             </div>
         </form>
     </div>
@@ -56,5 +51,9 @@
 
     .btn {
         padding: 10px 20px;
+    }
+
+    .text-danger {
+        color: #dc3545 !important;
     }
 </style>

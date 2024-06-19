@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ShopList.Models.ShoppingListViewModel>
+
+@{
+    ViewData["Title"] = "Listy Zakupów";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a href="@Url.Action("Create", "ShoppingList")" class="btn btn-primary mb-3">Dodaj nową listę zakupów</a>
+
+<div class="accordion" id="shoppingListAccordion">
+    @foreach (var shoppingList in Model)
+    {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading-@shoppingList.Id">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@shoppingList.Id" aria-expanded="true" aria-controls="collapse-@shoppingList.Id">
+                    @if (shoppingList.Products.All(i => i.IsDeleted))
+                    {
+                        <span class="text-decoration-line-through">@shoppingList.Name</span>
+                    }
+                    else
+                    {
+                        @shoppingList.Name
+                    }
+                </button>
+            </h2>
+            <div id="collapse-@shoppingList.Id" class="accordion-collapse collapse" aria-labelledby="heading-@shoppingList.Id" data-bs-parent="#shoppingListAccordion">
+                <div class="accordion-body">
+                    @Html.Partial("_ShoppingListDetails", shoppingList)
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .accordion-button {
+        font-weight: bold;
+    }
+
+    .text-decoration-line-through {
+        text-decoration: line-through;
+    }
+</style>

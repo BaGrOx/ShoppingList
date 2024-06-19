@@ -14,6 +14,7 @@ namespace ShopList.Data.Configuration
 
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x => x.IsDeleted).IsRequired();
+            builder.Property(x => x.ShoppingListId).IsRequired();
         }
     }
 }
